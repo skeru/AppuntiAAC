@@ -2394,11 +2394,11 @@ Esecuzione sequenziale vs.
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="5">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="16col%">
+<column alignment="center" valignment="top" width="16col%">
+<column alignment="center" valignment="top" width="16col%">
+<column alignment="center" valignment="top" width="16col%">
+<column alignment="center" valignment="top" width="16col%">
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
