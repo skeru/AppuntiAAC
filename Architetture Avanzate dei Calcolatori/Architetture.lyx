@@ -11410,11 +11410,6 @@ Funziona bene quando la quantità di parallelismo intrinseco nel programma
 \end_layout
 
 \begin_layout Standard
-Il multithreading riduce il tempo di esecuzione più di quanto non aumenti
- il consumo energetico.
-\end_layout
-
-\begin_layout Standard
 Una 
 \series bold
 caratteristica importante
@@ -11423,12 +11418,12 @@ caratteristica importante
 \emph on
 multithreading
 \emph default
- è che ci permette di ridurre il tempo di esecuzione più di quanto aumenti
- la potenza consumata (a differenza delle tecniche di 
+ è che ci permette di ridurre il tempo di esecuzione più di quanto aumentiamo
+ la potenza consumata; a differenza delle tecniche di 
 \emph on
 Instruction Level Parallelism
 \emph default
-).
+.
 \end_layout
 
 \begin_layout Subsubsection
