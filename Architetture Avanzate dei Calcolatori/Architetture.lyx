@@ -2660,7 +2660,7 @@ DM = Data Memory
 \end_layout
 
 \begin_layout Subsection
-Hazards (pericoli)
+Hazards (pericoli dovuti a dipendenze)
 \end_layout
 
 \begin_layout Subsubsection
