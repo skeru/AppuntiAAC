@@ -11341,6 +11341,23 @@ Il multithreading riduce il tempo di esecuzione più di quanto non aumenti
  il consumo energetico.
 \end_layout
 
+\begin_layout Standard
+Una 
+\series bold
+caratteristica importante
+\series default
+ del 
+\emph on
+multithreading
+\emph default
+ è che ci permette di ridurre il tempo di esecuzione più di quanto aumenti
+ la potenza consumata (a differenza delle tecniche di 
+\emph on
+Instruction Level Parallelism
+\emph default
+).
+\end_layout
+
 \begin_layout Subsubsection
 I thread
 \end_layout
