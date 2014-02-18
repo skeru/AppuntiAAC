@@ -12203,6 +12203,20 @@ entry
  (All'inizio sono tutte marcate invalide).
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Ricordiamoci che questo bit viene sempre controllato (insieme al 
+\emph on
+tag
+\emph default
+ che vedremo dopo) prima di prelevare una 
+\emph on
+entry
+\emph default
+.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Un 
 \series bold
@@ -12291,6 +12305,1928 @@ n-way Set-Associative Cache
 Direct Mapped Cache
 \end_layout
 
+\begin_layout Standard
+Ogni locazione di memoria corrisponde ad una e solo una locazione nella
+ cache.
+\end_layout
+
+\begin_layout Standard
+L'indirizzo del blocco nella cache è dato da:
+\begin_inset Formula 
+\[
+\left(\text{Block Address}\right)_{\text{cache}}=\left(\text{Block Address}\right)_{mem}\, mod\,\left(\text{\#Cache blocks}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quindi quando un programma richiede dalla memoria un certo indirizzo di
+ memoria a 
+\begin_inset Formula $N$
+\end_inset
+
+ bit, possiamo suddividerlo e interpretarlo come segue:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+← Block Address →
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+← Block Offset →
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Tag
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Word offset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Byte offset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(n° bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+N-(M+K+B)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+M
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+K
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+B
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Byte offset
+\series default
+ nella word
+\series bold
+: 
+\series default
+per identificare il byte indirizzato nella word: 
+\begin_inset Formula $B$
+\end_inset
+
+ bit
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nel caso in cui la memoria non sia indirizzabile al byte, ma solo indirizzabile
+ a word, 
+\begin_inset Formula $B=0$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Word offset
+\series default
+ nel blocco: per identificare una data parola all'interno di un blocco:
+ 
+\begin_inset Formula $K$
+\end_inset
+
+ bit
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se il blocco contiene solo una word, 
+\begin_inset Formula $K=0$
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Index
+\series default
+: Identifica il blocco, cioè ci dice quale 
+\begin_inset Quotes eld
+\end_inset
+
+riga
+\begin_inset Quotes erd
+\end_inset
+
+ della cache dobbiamo prendere: 
+\begin_inset Formula $M$
+\end_inset
+
+ bit
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tag
+\series default
+: Dopo aver selezionato la riga della cache con l'index, controlliamo se
+ il tag presente nella riga coincide con quello dell'indirizzo.
+ Il tag ha 
+\begin_inset Formula $N-\left(M+K+B\right)$
+\end_inset
+
+ bit
+\end_layout
+
+\begin_layout Subsubsection
+Esempio di Direct Mapped Cache
+\end_layout
+
+\begin_layout Itemize
+Memoria composta da indirizzi a: 
+\series bold
+32 bit
+\end_layout
+
+\begin_layout Itemize
+Cache size:
+\series bold
+ 64 K Byte
+\end_layout
+
+\begin_layout Itemize
+Block size: 
+\series bold
+128 bit 
+\series default
+(16 Byte)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{Numero di blocchi}\:=\:\frac{\text{Cache size}}{\text{Block size}}\:=\:\frac{64KB}{16B}=4K\, Blocks
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quindi avremo 
+\begin_inset Formula $log_{2}\left(\text{Block size}\right)=log_{2}\left(16\right)=4\, bit$
+\end_inset
+
+ come block offset, mentre l'index sarà da 
+\begin_inset Formula $log_{2}\left(\text{Numero blocchi}\right)=log_{2}\left(4096\right)=12\, bit$
+\end_inset
+
+ .
+ Il tag sarà il numero di bit rimanenti: 
+\begin_inset Formula $32-4-12=16\, bit$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tag (16 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index (12 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Word offset (2 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Byte offset (2 bit)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\emph on
+Fully Associative Cache
+\end_layout
+
+\begin_layout Standard
+In una cache 
+\emph on
+fully associative
+\emph default
+, 
+\series bold
+un blocco può essere messo in qualunque posizione nella cache
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Quando cerchiamo un blocco dobbiamo controllarli tutti!
+\end_layout
+
+\begin_layout Standard
+In questo caso non esiste un indice, ma utilizziamo esclusivamente un tag
+ per trovare il blocco giusto.
+\end_layout
+
+\begin_layout Standard
+(La ricerca in teoria può essere fatta in parallelo su tutti i blocchi mettendo
+ dei compratori e un multiplexer)
+\end_layout
+
+\begin_layout Standard
+Quindi la struttura dell'indirizzo sarà:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+← Block Offset →
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Tag
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Word offset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Byte offset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(n° bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+N-(K+B)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+K
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+B
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quindi:
+\begin_inset Formula 
+\[
+\text{Number of blocks}\:=\:\frac{\text{Cache Size}}{\text{Block Size}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Esempio di Fully Associative Cache
+\end_layout
+
+\begin_layout Itemize
+Indirizzi di memoria a 
+\begin_inset Formula $N=32\, bit$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Cache size di 
+\begin_inset Formula $256\, Byte$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Block size: 
+\begin_inset Formula $16\, Byte$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{Numero di blocchi}\,=\,\frac{256}{16}=16\, blocks
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quindi il block offset sarà in totale di 
+\begin_inset Formula $log_{2}\left(\text{Block size}\right)=log_{2}\left(16\right)=4\, bit$
+\end_inset
+
+.
+ Il tag sarà il numero di bit rimanenti: 
+\begin_inset Formula $32-4=28\: bit$
+\end_inset
+
+.
+ Se il blocco è indirizzabile al byte avremo quindi:
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="11">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tag (28 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Word Offset (2 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Byte Offset (2 bit)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\emph on
+n-way Set Associative Cache
+\end_layout
+
+\begin_layout Standard
+È una cache composta di vari set.
+ Ciascun insieme è composto da 
+\begin_inset Formula $n$
+\end_inset
+
+ blocchi, quindi:
+\begin_inset Formula 
+\[
+\text{Number of blocks}\:=\:\frac{\text{Cache Size}}{\text{Block Size}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{Number of sets}\:=\:\frac{\text{Cache Size}}{\left(\text{Block Size}\right)\cdot n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Il blocco di memoria può essere posizionato in ogni riga del set, quindi
+ la ricerca deve essere fatta 
+\bar under
+tra tutti i blocchi del set
+\bar default
+ in cui può essere.
+\end_layout
+
+\begin_layout Itemize
+Ogni blocco di memoria ha un suo set che gli corrisponde e può essere inserito
+ dove vuole, ma all'interno di quello specifico set.
+\end_layout
+
+\begin_layout Itemize
+Il set responsabile di un determinato blocco viene definito come:
+\begin_inset Formula 
+\[
+\left(\text{Set}\right)_{\text{cache}}\,=\,\left(\text{Block address}\right)_{\text{mem}}\, mod\,\left(\text{Number of sets}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quindi quando un programma richiede dalla memoria un certo indirizzo di
+ memoria a 
+\begin_inset Formula $N$
+\end_inset
+
+ bit, possiamo suddividerlo e interpretarlo come segue:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+← Block Address →
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+← Block Offset →
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Tag
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Word offset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Byte offset
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(n° bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+N-(M+K+B)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+M
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+K
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+B
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Esempio di 4-way Set Associative Cache
+\end_layout
+
+\begin_layout Itemize
+Indirizzi di memoria a 
+\begin_inset Formula $N=32\, bit$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Cache size: 
+\begin_inset Formula $4\, KByte$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Block size: 
+\begin_inset Formula $32\, bit$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Numero di blocchi:
+\begin_inset Formula 
+\[
+\text{Numero di blocchi}\,=\,\frac{\text{Cache size}}{\text{Block size}}=\frac{4KB}{4B}=1K\, blocks
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Numero di sets:
+\begin_inset Formula 
+\[
+\text{Numero di sets}\,=\,\frac{\text{Cache Size}}{\left(\text{Block size}\right)\cdot n}=256\, sets
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Avremo un block offset di 
+\begin_inset Formula $log_{2}\left(4\right)=2\: bit$
+\end_inset
+
+, indirizziamo solo una parola di memoria, quindi non serve il word offset,
+ 
+\begin_inset Formula $K=0$
+\end_inset
+
+, 
+\begin_inset Formula $B=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+L'index ci serve per assegnare il blocco al suo set, quindi avrà un numero
+ di bit che permette di indirizzare tutti i set presenti, cioè: 
+\begin_inset Formula $log_{2}\left(256\right)=8\, bit$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ergo restano 
+\begin_inset Formula $32-2-8=22\, bit$
+\end_inset
+
+ per il tag.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tag (22 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index (8 bit)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Byte offset (2 bit)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Tradeoff sulla associatività
+\end_layout
+
+\begin_layout Itemize
+Il 
+\series bold
+vantaggio 
+\series default
+di utilizzare maggiore associatività è che 
+\series bold
+riduciamo il 
+\emph on
+miss rate
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Lo 
+\series bold
+svantaggio
+\series default
+ è che:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumentano i 
+\series bold
+costi
+\series default
+ di implementazione
+\end_layout
+
+\begin_layout Itemize
+Aumenta l'
+\series bold
+hit time
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Dunque la scelta tra i vari tipi di associatività dipende dal tradeoff tra
+ la riduzione del miss rate e l'aumento di costi e hit time.
+\end_layout
+
+\begin_layout Itemize
+Aumento di associatività 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+Espandere i tag bits, ridurre gli index bit.
+\end_layout
+
+\begin_layout Subsection
+Il problema dell'allocazione del blocco
+\end_layout
+
+\begin_layout Itemize
+Nel caso di una cache 
+\emph on
+fully associative
+\emph default
+, quando abbiamo una 
+\series bold
+\emph on
+miss 
+\series default
+\emph default
+dobbiamo 
+\bar under
+decidere quale blocco sostituire
+\bar default
+.
+ 
+\series bold
+Ogni blocco
+\series default
+ è un possibile candidato per la sostituzione.
+\end_layout
+
+\begin_layout Itemize
+Se la cache è 
+\emph on
+set-associative
+\series bold
+, 
+\series default
+\emph default
+il problema non cambia, dobbiamo selezionare tra un certo insieme.
+\end_layout
+
+\begin_layout Itemize
+Invece per una cache direct mapped c'è solo un candidato possibile da sostituire.
+\end_layout
+
+\begin_layout Standard
+Le principali strategie per scegliere quale blocco sostituire sono tre:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Random
+\series default
+ (o pseudo-random): A caso
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+LRU
+\series default
+ (Least Recently Used): Cambio quello che non leggo da più tempo
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+FIFO
+\series default
+ (First In First Out): Cambio il più vecchio
+\end_layout
+
+\begin_layout Subsection
+Il problema della 
+\emph on
+write policy
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Write-Through
+\series default
+: L'informazione viene scritta sia ne blocco nella cache, sia nel blocco
+ nella memoria a basso livello.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Più semplice da implementare, ma richiede di inserire un 
+\series bold
+write buffer
+\series default
+ per non aspettare che la scrittura sia completata al livello inferiore
+ (per evitare stalli).
+\end_layout
+
+\begin_layout Itemize
+Le operazioni di write sono più costose di quelle di read
+\end_layout
+
+\begin_layout Itemize
+La memoria è sempre coerente con la cache.
+\end_layout
+
+\begin_layout Itemize
+Un problema è che questo 
+\series bold
+write buffer
+\series default
+ può poi saturare.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Write-Back
+\series default
+: L'informazione viene scritta solo nel blocco in cache.
+ Il blocco modificato viene scritto nella memoria a basso livello 
+\series bold
+solo
+\series default
+ quando viene sostituito a causa di una 
+\emph on
+miss
+\emph default
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In questo caso dobbiamo aggiungere un 
+\series bold
+\emph on
+dirty bit
+\series default
+\emph default
+ ad ogni entry della cache per sapere se il blocco è coerente o no con la
+ memoria centrale.
+\end_layout
+
+\begin_layout Itemize
+Il vantaggio di questo approccio è che la scrittura, così come la lettura,
+ può avvenire velocemente.
+\end_layout
+
+\begin_layout Itemize
+tante scritture sullo stesso blocco richiedono una unica scrittura verso
+ la memoria centrale in un secondo momento.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Problema della Write 
+\end_layout
+
+\begin_layout Standard
+Quando c'è una richiesta di write e in cache non c'è ancora la riga relativa
+ al blocco (
+\emph on
+write miss
+\emph default
+), cosa faccio?
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Write allocate
+\series default
+ (o 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+fetch on write
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+)
+\series bold
+: Alloco
+\series default
+ una nuova riga nellacache e poi scrivo
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Significa che solitamente bisogna fare una 
+\begin_inset Quotes eld
+\end_inset
+
+read miss
+\begin_inset Quotes erd
+\end_inset
+
+ per riempire la entry
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+No write allocate
+\series default
+ (o 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+write around
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Invia semplicemente i dati da scrivere direttamente alla memoria di basso
+ livello.
+ Non allocare una nuova riga nella cache
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Per gestire una write miss si possono utilizzare entrambi i metodi, insieme
+ con write-back oppure con write-through, però solitamente:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Write-back 
+\series default
+\emph on
+cache
+\emph default
+ utilizza l'opzione 
+\series bold
+Write Allocate 
+\series default
+(sperando che le prossime write del blocco saranno fatte ancora nella cache)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Write-through
+\series default
+ cache utilizza l'ozione 
+\series bold
+No Write Allocate
+\series default
+ (sperando che le prossime write sul blocco siano fatte ancora direttamente
+ in memoria)
+\end_layout
+
+\begin_layout Subsection
+Riassumendo
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Read Hit
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Leggi i dati in cache.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Read Miss
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La CPU va in stallo, i dati vengono richiesti alla memoria, copiati nella
+ cache (write in cache) e ripeto l'opzione di read.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Write Hit
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+(write-through) I dati vengono scritti sia in cache che nella memoria
+\end_layout
+
+\begin_layout Itemize
+(write-back) I dati vengono scritti solo in cache e copiati in memoria centrale
+ solo quando devo togliere la entry dalla cache.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Write Miss
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La CPU va in stallo
+\end_layout
+
+\begin_layout Itemize
+(Write allocate) Richiesto il dato dalla memoria centrale, copiato in cache
+ e ripeto l'oerazione di cache write
+\end_layout
+
+\begin_layout Itemize
+(No write allocate) Invia semplicemente i dati alla memoria a basso livello
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Impatto della gerarchia di memoria sul 
+\begin_inset Formula $CPU_{time}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+CPU_{time}=\left(\text{CPU exec cycles}\,+\,\text{Memory stall cycles}\right)\cdot T_{CLK}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\text{CPU exec cycles}\,=\, IC\cdot CPU_{exec}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $IC\,=\,\text{Instruction Count}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $CPI_{exec}$
+\end_inset
+
+ include istruzioni ALU e LD/STORE
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\text{Memory stall cycles}\,=\, IC\cdot\left(\text{Misses per istruzione}\right)\cdot\left(\text{Miss Penalty}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+CPU_{time}=IC\cdot\left(CPU_{exec}\,+\,\left(\text{Misses per instr}\right)\cdot\left(\text{Miss\,\ penalty}\right)\right)\cdot T_{CLK}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\text{Misses per instr}\,=\,\left(\text{Memory accesses per instruction}\right)\cdot\left(\text{Miss rate}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+CPU_{time}\,=\, IC\cdot\left(CPU_{exec}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se consideriamo anche gli stalli a causa degli hazards della pipeline:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+CPU_{time}\,=\, IC\cdot\left(CPU_{exec}+\text{Stalls per instr}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Performance della cache
+\end_layout
+
+\begin_layout Standard
+Avarage Memory Access Time
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AMAT\,=\,\text{Hit Time}\,+\,\text{Miss Rate}\,\cdot\,\text{Miss Penalty}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come migliorare le performance:
+\end_layout
+
+\begin_layout Itemize
+Ridurre hit time
+\end_layout
+
+\begin_layout Itemize
+Ridurre miss rate
+\end_layout
+
+\begin_layout Itemize
+Ridurre miss penalty
+\end_layout
+
+\begin_layout Subsubsection
+Architettura Harvard
+\end_layout
+
+\begin_layout Standard
+Teniamo due cache di livello 1 diverse, una cache istruzioni e una cache
+ dati.
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Formula 
+\[
+AMAT=\%Intr\cdot\left(\text{Hit Time}\,+\,\text{Instruction Cache Miss Rate}\,\cdot\,\text{Miss Penalty}\right)+\%Data\cdot\left(\text{Hit Time\,+\,\text{Data Cache Miss Rate\,\cdot\,\text{Miss Penalty}}}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+L'assunzione è che solitamente: 
+\begin_inset Formula $\text{Instruction Cache Miss Rate}\,\ll\,\text{Data Cache Miss Rate}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Second Level Cache
+\end_layout
+
+\begin_layout Standard
+L'idea è che la cache di secondo livello può catturare molti accessi che
+ andrebbero verso la memoria centrale, riducendo in questo modo la miss
+ penalty
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AMAT\,=\,\text{Hit Time}_{L1}+\text{Miss Rate}_{L1}\cdot\text{Miss Penalty}_{L1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dove: 
+\begin_inset Formula $\text{Miss Penalty}_{L1}=\text{Hit Time}_{L2}+\text{Miss Rate}_{L2}\cdot\text{Miss Penalty}_{L2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AMAT\,=\,\text{Hit Time}_{L1}+\text{Miss Rate}_{L1}\cdot\left(\text{Hit Time}_{L2}+\text{Miss Rate}_{L2}\cdot\text{Miss Penalty}_{L2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Definiamo:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Local Miss rate: 
+\series default
+I miss in questa cache vengono divisi per il numero totale di accessi a
+ questa cache.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\text{Miss rate}_{L1}$
+\end_inset
+
+ per L1
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\text{Miss rate}_{L2}$
+\end_inset
+
+ per L2
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Global Miss rate
+\series default
+: I miss in questa cache divisi per il numero totale di accessi alla memoria
+ generati dalla CPU 
+\begin_inset Formula 
+\[
+\text{Miss Rate}_{GLOBAL}=\text{Miss Rate}_{L1}\cdot\text{Miss Rate}_{L2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+È questo quello che conta veramente: indica la frazione di accessi alla
+ memoria dalla CPU che vanno verso la memoria centrale
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+In base a quanto definito possiamo riscrivere AMAT così:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AMAT=\text{Hit Time}_{L1}+\text{Miss Rate}_{L1}\cdot\text{Hit Time}_{L2}+\text{Miss Rate}_{GLOBAL}\cdot\text{Miss Penalty}_{L2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vediamo inoltre che:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{Memory stall cycles per instr\,=\,\text{Misses per instr}\cdot\text{Miss Penalty}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Metriche di performance
+\end_layout
+
+\begin_layout Itemize
+Latenza
+\end_layout
+
+\begin_layout Itemize
+Banda
+\end_layout
+
+\begin_layout Itemize
+Tempo di accesso (tempo tra richiesta di lettura e quando la word arriva
+ al processore)
+\end_layout
+
+\begin_layout Itemize
+Cycle time (tempo minimo tra le richieste non correlate alla memoria)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Ambdahl
+\series default
+:
+\end_layout
+
+\begin_layout Itemize
+La capacità della memoria dovrebbe crescere linearmente con la velocità
+ del processore
+\end_layout
+
+\begin_layout Itemize
+Sfortunatamente la capacitù della memoria e la velocità non vanno di pari
+ passo con i processori.
+\end_layout
+
+\begin_layout Subsection
+Tecnologia cache vs tecnologia RAM
+\end_layout
+
+\begin_layout Itemize
+RAM → DRAM
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+1 transistor/bit
+\end_layout
+
+\begin_layout Itemize
+Necessita di essere mandata in refresh ogni 
+\begin_inset Formula $8\, ms$
+\end_inset
+
+ circa.
+\end_layout
+
+\begin_layout Itemize
+Ottimizzazioni:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aggiungere un clock alla DRAM per renderla sincrona
+\end_layout
+
+\begin_layout Itemize
+Interfacce già larghe
+\end_layout
+
+\begin_layout Itemize
+Double Data Rate (DDR)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+DDR2: ~400 MHz
+\end_layout
+
+\begin_layout Itemize
+DDR3: ~800MHz
+\end_layout
+
+\begin_layout Itemize
+DDR4: ~1600MHz
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Più banchi su ogni dispositivo DRAM.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Cache → SRAM
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+6 transistors/bit
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Multiprocessori
 \end_layout
