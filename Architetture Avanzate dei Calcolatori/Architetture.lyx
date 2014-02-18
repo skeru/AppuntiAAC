@@ -12589,6 +12589,18 @@ Tag
  bit
 \end_layout
 
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename cc_svg/cache_direct_mapped.svg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Esempio di Direct Mapped Cache
 \end_layout
@@ -12689,6 +12701,18 @@ Byte offset (2 bit)
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename cc_svg/direct_mapped_cache_example.svg
+	lyxscale 50
+	scale 50
 
 \end_inset
 
@@ -12879,6 +12903,18 @@ Quindi:
 \[
 \text{Number of blocks}\:=\:\frac{\text{Cache Size}}{\text{Block Size}}
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename cc_svg/cache_fully_associative.svg
+	lyxscale 50
+	scale 50
 
 \end_inset
 
@@ -13301,6 +13337,18 @@ B
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename cc_svg/cache_set_associative.svg
+	lyxscale 50
+	scale 50
 
 \end_inset
 
