@@ -1952,35 +1952,53 @@ Jump
 Operazioni MIPS riassunte fase per fase
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Paragraph
 
 \series bold
 ALU instructions:
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
-IF: Fetch e incremento PC
+
+\series bold
+IF
+\series default
+: Fetch e incremento PC
 \end_layout
 
 \begin_layout Itemize
-ID: Lettura dei registri sorgente ed eventuale estensione di segno dell'offset
+
+\series bold
+ID
+\series default
+: Lettura dei registri sorgente ed eventuale estensione di segno dell'offset
 \end_layout
 
 \begin_layout Itemize
-EX: Operazione ALU sui dati
+
+\series bold
+EX
+\series default
+: Operazione ALU sui dati
 \end_layout
 
 \begin_layout Itemize
-ME:
+
+\series bold
+ME
+\series default
+:
 \end_layout
 
 \begin_layout Itemize
-WB: Scrittura del risultato nel register file
+
+\series bold
+WB
+\series default
+: Scrittura del risultato nel register file
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
+\begin_layout Paragraph
 
 \series bold
 LOAD instructions
@@ -1988,29 +2006,47 @@ LOAD instructions
 :
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
-IF: Fetch e incremento PC
+
+\series bold
+IF
+\series default
+: Fetch e incremento PC
 \end_layout
 
 \begin_layout Itemize
-ID: Lettura del registro base
+
+\series bold
+ID
+\series default
+: Lettura del registro base
 \end_layout
 
 \begin_layout Itemize
-EX: Operazione di ALU per somma degli indirizzi
+
+\series bold
+EX
+\series default
+: Operazione di ALU per somma degli indirizzi
 \end_layout
 
 \begin_layout Itemize
-ME: Operazione di lettura da memoria del valore
+
+\series bold
+ME
+\series default
+: Operazione di lettura da memoria del valore
 \end_layout
 
 \begin_layout Itemize
-WB: Scrittura del valore letto nel register file
+
+\series bold
+WB
+\series default
+: Scrittura del valore letto nel register file
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
+\begin_layout Paragraph
 
 \series bold
 STORE instructions
@@ -2018,29 +2054,47 @@ STORE instructions
 :
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
-IF: Fetch e incremento PC
+
+\series bold
+IF
+\series default
+: Fetch e incremento PC
 \end_layout
 
 \begin_layout Itemize
-ID: Lettura del registro base e valore sorgente 
+
+\series bold
+ID
+\series default
+: Lettura del registro base e valore sorgente 
 \end_layout
 
 \begin_layout Itemize
-EX: Operazione di ALU per somma degli indirizzi
+
+\series bold
+EX
+\series default
+: Operazione di ALU per somma degli indirizzi
 \end_layout
 
 \begin_layout Itemize
-ME: Scrittura in memoria del valore
+
+\series bold
+ME
+\series default
+: Scrittura in memoria del valore
 \end_layout
 
 \begin_layout Itemize
-WB: 
+
+\series bold
+WB
+\series default
+: 
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
+\begin_layout Paragraph
 
 \series bold
 Conditional branch instructions
@@ -2048,28 +2102,46 @@ Conditional branch instructions
 :
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
-IF: Fetch e incremento PC
+
+\series bold
+IF
+\series default
+: Fetch e incremento PC
 \end_layout
 
 \begin_layout Itemize
-ID: Lettura dei due registri da confrontare
+
+\series bold
+ID
+\series default
+: Lettura dei due registri da confrontare
 \end_layout
 
 \begin_layout Itemize
-EX: Operazione ALU di confronto e somma del program counter in caso di branch
+
+\series bold
+EX
+\series default
+: Operazione ALU di confronto e somma del program counter in caso di branch
 \end_layout
 
 \begin_layout Itemize
-ME: Scrittura del PC (non è nel register file)
+
+\series bold
+ME
+\series default
+: Scrittura del PC (non è nel register file)
 \end_layout
 
 \begin_layout Itemize
-WB: 
+
+\series bold
+WB
+\series default
+: 
 \end_layout
 
-\end_deeper
 \begin_layout Subsubsection
 Schema delle implementazioni
 \end_layout
@@ -2081,8 +2153,9 @@ Implementazione base del data path MIPS
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename svg/001.svg
-	scale 50
+	filename cc_svg/001_pipeline_MIPS.svg
+	lyxscale 20
+	scale 25
 
 \end_inset
 
@@ -2447,7 +2520,7 @@ Write Back
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename svg/008.svg
+	filename cc_svg/008_pipeline_vs_sequenziale.svg
 	lyxscale 50
 	scale 40
 
