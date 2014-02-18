@@ -11710,6 +11710,588 @@ Intel hyperthreading
 \end_layout
 
 \begin_layout Section
+Memorie Cache
+\end_layout
+
+\begin_layout Standard
+Lo scopo principale delle memorie cache è quello di aumentare le performance
+ del sistema operando sulla memoria, di modo da:
+\end_layout
+
+\begin_layout Itemize
+Dare all'utente l'illusione di utilizzare una memoria grande e veloce
+\end_layout
+
+\begin_layout Itemize
+Fornire al processore i dati velocemente
+\end_layout
+
+\begin_layout Standard
+Il problema principale infatti è che il tempo di accesso alla memoria è
+ molto più lungo del tempo di computazione del processore, soprattutto man
+ mano che vengono sviluppati nuovi processori lo sviluppo sulla velocità
+ della memoria non va di pari passo.
+\end_layout
+
+\begin_layout Subsection
+Sfruttare la località
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Località temporale
+\series default
+: Quando c'è un riferimento ad un elemento di memoria, la tendenza è quella
+ di 
+\bar under
+riferirsi ancora allo stesso elemento in memoria presto
+\bar default
+ (spesso andiamo ad accedere a dati riutilizzati all'interno di un loop.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Località spaziale
+\series default
+: Quando c'è un riferimento ad un elemento di memoria, la tendenza è quella
+ di 
+\bar under
+riferirsi ancora ad altri elementi nella stessa area di memoria (con indirizzi
+ vicini) presto
+\bar default
+.
+ Pensiamo ad esempio ad un basic block o accessi a dati organizzati a matrice
+ o array.
+\end_layout
+
+\begin_layout Subsection
+Gerarchia della memoria
+\end_layout
+
+\begin_layout Standard
+La memoria viene strutturata a piramide, ogni livello con diversa dimensione
+ e velocità, implementato da una diversa tecnologia per ottenere un buon
+ tradeoff tra costi e performance.
+ Lo 
+\series bold
+scopo principale
+\series default
+ è quello di fornite all'utente 
+\series bold
+tanta memoria
+\series default
+ a basso costo, mantenendola però 
+\series bold
+veloce
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+La memoria viene strutturata a piramide: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Registri
+\series default
+: Accesso immediato (300 ps), dimensione molto ridotta (~1000 Bytes)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cache L1
+\series default
+: Accesso quasi immediato (1 ns), dimensione ridotta (~64 KB)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cache L2
+\series default
+: Accesso veloce (3-10 ns), dimensione ridotta (~256 KB)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cache L3
+\series default
+: Accesso veloce (10-20 ns), dimensione ridotta (~2 MB)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Memoria centrale
+\series default
+: Accesso rapido (50-100 ns), dimensione media (4-16 GB)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Disco
+\series default
+: Accesso lento (5-10 ms), dimensione estesa (4-16 TB)
+\end_layout
+
+\begin_layout Standard
+I Registri sono costruiti con tecnologia SRAM.
+ È ovvio che sarebbe possibile costruire una memoria vastissima e velocissima
+ con questa tecnologia.
+ Questa memoria avrebbe però costi enormi, oltre ad essere difficile da
+ inserire vicino al processore.
+ Ergo con questa gerarchia di memoria riusciamo ad ottenere performance
+ buone/ottime con il minimo della spesa.
+\end_layout
+
+\begin_layout Subsubsection
+Gerarchia della memoria nei processori moderni
+\end_layout
+
+\begin_layout Standard
+Ad esempio un 
+\emph on
+Intel Core i7
+\emph default
+ può generare due riferimenti per core per clock.
+ 
+\end_layout
+
+\begin_layout Standard
+Avendo 4 clock a 3.2GHz abbiamo:
+\end_layout
+
+\begin_layout Itemize
+25.6 miliardi di riferimenti/secondo di dati a 64-bit
+\end_layout
+
+\begin_layout Itemize
+12.8 miliardi di riferimenti a istruzioni a 128-bit al secondo
+\end_layout
+
+\begin_layout Standard
+Cioè una banda di picco di 
+\series bold
+409.6 GB/s
+\end_layout
+
+\begin_layout Standard
+Una memoria DRAM standard ha però 
+\series bold
+una banda che è solo il 6%
+\series default
+ di questa velocità (25 GB/s)
+\end_layout
+
+\begin_layout Standard
+Abbiamo allora bisogno di varie cose:
+\end_layout
+
+\begin_layout Itemize
+Cache multi-porta in pipeline
+\end_layout
+
+\begin_layout Itemize
+Due livelli di cache per ogni core
+\end_layout
+
+\begin_layout Itemize
+Cache di terzo livello condivisa sul chip
+\end_layout
+
+\begin_layout Subsection
+Concetti base delle cache
+\end_layout
+
+\begin_layout Itemize
+La 
+\series bold
+quantità minima
+\series default
+ di dati che possono essere copiati dalla memoria centrale alla cache è
+ chiamato 
+\series bold
+blocco
+\series default
+ o 
+\series bold
+\emph on
+cache line
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Per sfruttare la 
+\bar under
+località spaziale
+\bar default
+, la dimensione del blocco deve essere un 
+\series bold
+multiplo della 
+\emph on
+word-size
+\emph default
+ della memoria
+\series default
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ad esempio: 
+\series bold
+128-bit block size
+\series default
+ = 4 word da 32-bit
+\end_layout
+
+\begin_layout Itemize
+Ad esempio: Cache da 64KByte, dimensione del blocco da 128-bit (16 Bytes)
+ 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ 4000 blocchi nella cache
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Quando un dato richiesto dal processore viene trovato direttamente in uno
+ dei blocchi della cache si dice che abbiamo un 
+\series bold
+\emph on
+hit
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Quando un dato richiesto non è in un blocco della cache abbiamo un 
+\series bold
+\emph on
+miss
+\series default
+\emph default
+.
+ In questo caso per trovare il blocco dobbiamo per forza accedere al livello
+ successivo della memoria.
+ In caso di 
+\emph on
+miss 
+\emph default
+dobbiamo mandare in 
+\series bold
+stallo
+\series default
+ la CPU, 
+\series bold
+richiedere il blocco
+\series default
+ dalla memoria principale, 
+\series bold
+copiare il blocco
+\series default
+ nella cache e 
+\series bold
+ripetere l'accesso alla cache
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Hit rate
+\series default
+: È il numero di accessi alla memoria che trovano i dati nella cache, rispetto
+ al numero totale di accessi alla memoria fatti
+\begin_inset Formula 
+\[
+Hit\, rate\:=\:\frac{\#hits}{\#memory\, accesses}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Da un certo punto di vista rappresenta la probabilità di trovare i dati
+ nella cache
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Hit time
+\series default
+: È il 
+\bar under
+tempo
+\bar default
+ necessario per accedere ai dati nella cache, incluso il tempo necessario
+ per capire se abbiamo avuto un hit o un miss 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Miss rate
+\series default
+: È il numero di accessi alla memoria che non trovano i dati nella cache,
+ rispetto al numero totale di accessi alla memoria fatti
+\begin_inset Formula 
+\[
+Miss\, rate\:=\:\frac{\#misses}{\#memory\, accesses}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Nota:
+\series default
+
+\begin_inset Formula 
+\[
+Hit\, rate\:+\: Miss\, rate\:=\:1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Miss penalty
+\series default
+: Tempo necessario per accedere al livello inferiore della memoria
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Miss time
+\series default
+: 
+\begin_inset Formula 
+\[
+Miss\, Time\:=\: Hit\, Time\:+\: Miss\, penalty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Infatti Il tempo per un miss comprende 
+\series bold
+sia
+\series default
+ il 
+\series bold
+tempo di hit
+\series default
+ normale, che il tempo aggiuntivo di 
+\series bold
+\emph on
+penalty
+\series default
+\emph default
+ per aggiungere il blocco mancante.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Teniamo conto che comunque: 
+\begin_inset Formula 
+\[
+Hit\, time\:\ll\: Miss\, Penalty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Average Memory Access Time - AMAT
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AMAT\:=\: Hit\, Rate\,\cdot\, Hit\, Time\:+\: Miss\, Rate\,\cdot\, Miss\, Time
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Dove: 
+\begin_inset Formula $Miss\, Time\:=\: Hit\, Time\:+\: Miss\, Penalty$
+\end_inset
+
+ , sapendo che 
+\begin_inset Formula $Hit\, Rate\:+\: Miss\, Rate\:=\:1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Quindi otteniamo:
+\begin_inset Formula 
+\[
+AMAT\:=\: Hit\, Time\:+\: Miss\, Rate\,\cdot\, Miss\, Penalty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Struttura della Cache
+\end_layout
+
+\begin_layout Standard
+La cache è strutturata con una serie di 
+\emph on
+entries
+\emph default
+.
+ Ogni 
+\emph on
+entry
+\emph default
+ comprende:
+\end_layout
+
+\begin_layout Itemize
+Un 
+\series bold
+Valid Bit
+\series default
+: per indicare se questa 
+\emph on
+entry
+\emph default
+ contiene dati validi o no.
+ (All'inizio sono tutte marcate invalide).
+\end_layout
+
+\begin_layout Itemize
+Un 
+\series bold
+Cache Tag
+\series default
+: contiene il valore che identifica 
+\begin_inset Quotes eld
+\end_inset
+
+univocamente
+\begin_inset Quotes erd
+\end_inset
+
+ l'indirizzo di memoria corrispondente ai dati memorizzati.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cache Data
+\series default
+: contiene una copia dei dati, cioè il 
+\series bold
+blocco
+\series default
+ o 
+\series bold
+\emph on
+cache line
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Abbiamo il problema del 
+\series bold
+\bar under
+block placement
+\series default
+\bar default
+ nella cache: dato l'indirizzo del blocco nella memoria centrale, dove possiamo
+ posizionare il blocco nella cache?
+\end_layout
+
+\begin_layout Standard
+Dobbiamo trovare una 
+\series bold
+corrispondenza tra
+\series default
+ gli 
+\series bold
+indirizzi
+\series default
+ di 
+\series bold
+memoria
+\series default
+ del blocco e l'indirizzo del blocco nella 
+\series bold
+cache
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Il tipo di corrispondenza che decidiamo di adottare ci porta a tre tipi
+ diversi di cache:
+\end_layout
+
+\begin_layout Itemize
+Direct Mapped cache
+\end_layout
+
+\begin_layout Itemize
+Fully Associative Cache
+\end_layout
+
+\begin_layout Itemize
+n-way Set-Associative Cache
+\end_layout
+
+\begin_layout Subsection
+
+\emph on
+Direct Mapped Cache
+\end_layout
+
+\begin_layout Section
 Multiprocessori
 \end_layout
 
