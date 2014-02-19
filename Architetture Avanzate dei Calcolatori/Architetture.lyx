@@ -5361,8 +5361,9 @@ I due bit vengono utilizzati per memorizzare uno dei 4 stati di una macchina
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename 046.png
-	scale 40
+	filename cc_svg/046_branch_prediction_2bit_fsa.svg
+	lyxscale 30
+	scale 30
 
 \end_inset
 
