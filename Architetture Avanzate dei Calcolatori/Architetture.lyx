@@ -5020,10 +5020,18 @@ lavoro
 \end_inset
 
  viene soltanto sprecato e il programma può continuare correttamente anche
- dopo aver eseguito quella istruzione inutile, ovvero l'istruzione nel delay
- slot non ha sporcato lo stato dell'esecuzione.
- Per esempio va bene se il registro destinazione dell'operazione inutile
- è un registro utilizzato solo nel ramo errato del flusso di esecuzione.
+ dopo aver eseguito quella istruzione inutilmente, cioè l'istruzione nel
+ delay slot non 
+\begin_inset Quotes eld
+\end_inset
+
+sporca
+\begin_inset Quotes erd
+\end_inset
+
+ lo stato dell'esecuzione.
+ Per esempio va bene se il registro destinazione dell'operazione è un registro
+ utilizzato solo nel ramo errato del flusso di esecuzione.
 \end_layout
 
 \begin_deeper
@@ -5039,7 +5047,8 @@ NOP
 
 \begin_layout Itemize
 Nelle pipelines più profonde il delayed branch è più lungo di un ciclo,
- quindi è necessario trovare altre istruzioni ed è ancora più difficile.
+ quindi è necessario trovare altre istruzioni e questa cosa è ancora più
+ difficile.
 \end_layout
 
 \end_deeper
@@ -5131,12 +5140,12 @@ L'istruzione nel branch delay slot viene eseguita se il branch è taken.
 
 \begin_layout Itemize
 L'istruzione nel branch delay slot non viene eseguita (viene trasformata
- in NOP) se il branch è untaken
+ in NOP) se il branch è untaken.
 \end_layout
 
 \begin_layout Itemize
-È un approccio utile per backward branches (come i branch utilizzati per
- nei loop)
+È un approccio utile per backward branches (salti all'indietro nel codice,
+ come i branch utilizzati per i loop).
 \end_layout
 
 \end_deeper
