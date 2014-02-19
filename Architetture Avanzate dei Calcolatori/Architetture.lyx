@@ -5171,17 +5171,17 @@ prevedere il futuro
 
 \begin_layout Standard
 Utilizziamo hardware per prevedere dinamicamente il risultato di un branch.
- La predizione dipenderà sul comportamento del branch a runtime e cambierà
+ La predizione dipenderà dal comportamento del branch a runtime e si adatterà
  se il branch cambia il suo comportamento durante l'esecuzione.
 \end_layout
 
 \begin_layout Standard
 Partiamo con uno schema di predizione di branch semplice e poi esaminiamo
- approcci che aumentano l'accuratezza.
+ approcci che ne aumentano l'accuratezza.
 \end_layout
 
 \begin_layout Standard
-I meccanismi principali di predizione sono due:
+I componenti principali per gestire la predizione sono due:
 \end_layout
 
 \begin_layout Itemize
@@ -5189,7 +5189,7 @@ I meccanismi principali di predizione sono due:
 \series bold
 Branch outcome predictor
 \series default
-: per prevedere la direzione di un branch (taken o not taken)
+: per prevedere la direzione di un branch (taken o not taken).
 \end_layout
 
 \begin_layout Itemize
@@ -5201,7 +5201,7 @@ Branch target predictor
 \series bold
 branch target buffer
 \series default
- : per prevedere il branch target address in caso di branch taken
+: per prevedere il branch target address in caso di branch taken.
 \end_layout
 
 \begin_layout Standard
@@ -5209,16 +5209,16 @@ Questi moduli sono utilizzati dall'unità di
 \emph on
 instruction fetch
 \emph default
- per prevedere la prossima istruzione da leggere nella cache delle istruzioni
+ per prevedere la prossima istruzione da leggere nella cache istruzioni
  (I-cache)
 \end_layout
 
 \begin_layout Itemize
-Se il branch è not taken → PC viene incrementato
+Se il branch è previsto not taken → PC viene incrementato.
 \end_layout
 
 \begin_layout Itemize
-Se il branch è taken → BTP (il predittore) dà l'indirizzo di destinazione
+Se il branch è previsto taken → BTP fornisce l'indirizzo di destinazione.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5232,25 +5232,27 @@ Branch History Table - BHT (o Branch Prediction Buffer)
 taken
 \series default
  recentemente o untaken.
- Questa tabella è indicizzata, come indice si usa la parte meno significativa
+ Questa tabella è indicizzata e come indice si usa la parte meno significativa
  del campo indirizzo dell'istruzione di branch.
 \end_layout
 
 \begin_layout Itemize
 Predizione: abbiamo un indizio che si assume essere corretto e iniziamo
- a fare il fetch nella direzione prevista.
+ a fare fetch nella direzione prevista.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
 Se scopriamo che la predizione era sbagliata, il bit di predizione viene
- invertito e ri-salvato.
- La pipeline viene ripulita e la sequenza corretta viene eseguita.
+ sovrascritto in tabella con valore invertito.
+ La pipeline viene quindi ripulita e la sequenza corretta di istruzioni
+ viene eseguita.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-La tabella non ha tags (ogni accesso è un 
+La tabella non ha tag per identificare univocamente un branch (ogni accesso
+ è un 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5258,9 +5260,9 @@ HIT
 \begin_inset Quotes erd
 \end_inset
 
-) e il bit di predizione può essere messo da un'altra branch con lo stesso
- indice, ma non importa.
- La predizione 
+) e il bit di predizione può essere messo da un altro branch con lo stesso
+ indice, tuttavia questa possibilità non preoccupa in quanto la predizione
+ 
 \series bold
 fornisce solo una traccia
 \series default
