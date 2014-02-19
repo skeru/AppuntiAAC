@@ -11715,7 +11715,7 @@ Memorie Cache
 
 \begin_layout Standard
 Lo scopo principale delle memorie cache è quello di aumentare le performance
- del sistema operando sulla memoria, di modo da:
+ del sistema operando sulla memoria, in modo da:
 \end_layout
 
 \begin_layout Itemize
@@ -11727,13 +11727,17 @@ Fornire al processore i dati velocemente
 \end_layout
 
 \begin_layout Standard
-Il problema principale infatti è che il tempo di accesso alla memoria è
- molto più lungo del tempo di computazione del processore, soprattutto man
- mano che vengono sviluppati nuovi processori lo sviluppo sulla velocità
- della memoria non va di pari passo.
+Il problema principale è che il tempo di accesso alla memoria è molto più
+ lungo del tempo di computazione del processore, soprattutto man mano che
+ vengono sviluppati nuovi processori l'incremento di velocità della memoria
+ non va di pari passo.
 \end_layout
 
 \begin_layout Subsection
+Località e gerarchie di memoria
+\end_layout
+
+\begin_layout Subsubsection
 Sfruttare la località
 \end_layout
 
@@ -11745,9 +11749,9 @@ Località temporale
 : Quando c'è un riferimento ad un elemento di memoria, la tendenza è quella
  di 
 \bar under
-riferirsi ancora allo stesso elemento in memoria presto
+riferirsi presto ancora allo stesso elemento in memoria 
 \bar default
- (spesso andiamo ad accedere a dati riutilizzati all'interno di un loop.
+(spesso andiamo ad accedere a dati riutilizzati all'interno di un loop.
 \end_layout
 
 \begin_layout Itemize
@@ -11758,21 +11762,21 @@ Località spaziale
 : Quando c'è un riferimento ad un elemento di memoria, la tendenza è quella
  di 
 \bar under
-riferirsi ancora ad altri elementi nella stessa area di memoria (con indirizzi
- vicini) presto
+riferirsi presto ad altri elementi nella stessa area di memoria (con indirizzi
+ vicini)
 \bar default
 .
- Pensiamo ad esempio ad un basic block o accessi a dati organizzati a matrice
- o array.
+ Pensiamo ad esempio ad un basic block (per la memoria istruzioni) o ai
+ dati organizzati in matrici o array (per la memoria dati).
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Gerarchia della memoria
 \end_layout
 
 \begin_layout Standard
 La memoria viene strutturata a piramide, ogni livello con diversa dimensione
- e velocità, implementato da una diversa tecnologia per ottenere un buon
+ e velocità, implementato con una diversa tecnologia per ottenere un buon
  tradeoff tra costi e performance.
  Lo 
 \series bold
@@ -11787,10 +11791,6 @@ tanta memoria
 veloce
 \series default
 .
-\end_layout
-
-\begin_layout Standard
-La memoria viene strutturata a piramide: 
 \end_layout
 
 \begin_layout Itemize
@@ -11851,7 +11851,7 @@ I Registri sono costruiti con tecnologia SRAM.
  buone/ottime con il minimo della spesa.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Gerarchia della memoria nei processori moderni
 \end_layout
 
@@ -11891,7 +11891,7 @@ una banda che è solo il 6%
 \end_layout
 
 \begin_layout Standard
-Abbiamo allora bisogno di varie cose:
+Abbiamo allora bisogno di diverse cose:
 \end_layout
 
 \begin_layout Itemize
@@ -11966,23 +11966,25 @@ Ad esempio: Cache da 64KByte, dimensione del blocco da 128-bit (16 Bytes)
 \end_deeper
 \begin_layout Itemize
 Quando un dato richiesto dal processore viene trovato direttamente in uno
- dei blocchi della cache si dice che abbiamo un 
+ dei blocchi della cache si dice che abbiamo un cache hit (o semplicemente
+ 
 \series bold
 \emph on
 hit
 \series default
 \emph default
-.
+).
 \end_layout
 
 \begin_layout Itemize
-Quando un dato richiesto non è in un blocco della cache abbiamo un 
+Quando un dato richiesto non è in un blocco della cache abbiamo un cache
+ miss (o semplicemente 
 \series bold
 \emph on
 miss
 \series default
 \emph default
-.
+).
  In questo caso per trovare il blocco dobbiamo per forza accedere al livello
  successivo della memoria.
  In caso di 
@@ -12027,8 +12029,7 @@ Hit\, rate\:=\:\frac{\#hits}{\#memory\, accesses}
 
 \begin_deeper
 \begin_layout Itemize
-Da un certo punto di vista rappresenta la probabilità di trovare i dati
- nella cache
+Rappresenta la probabilità di trovare i dati nella cache
 \end_layout
 
 \end_deeper
@@ -12083,7 +12084,7 @@ Hit\, rate\:+\: Miss\, rate\:=\:1
 \series bold
 Miss penalty
 \series default
-: Tempo necessario per accedere al livello inferiore della memoria
+: Tempo necessario per recuperare i dati dai livelli inferiori della memoria
 \end_layout
 
 \begin_layout Itemize
@@ -12104,7 +12105,7 @@ Miss\, Time\:=\: Hit\, Time\:+\: Miss\, penalty
 
 \begin_deeper
 \begin_layout Itemize
-Infatti Il tempo per un miss comprende 
+Infatti il tempo per un miss comprende 
 \series bold
 sia
 \series default
@@ -12134,7 +12135,7 @@ Hit\, time\:\ll\: Miss\, Penalty
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Average Memory Access Time - AMAT
 \end_layout
 
@@ -12150,19 +12151,27 @@ AMAT\:=\: Hit\, Rate\,\cdot\, Hit\, Time\:+\: Miss\, Rate\,\cdot\, Miss\, Time
 \end_layout
 
 \begin_layout Itemize
-Dove: 
+Tenendo conto che:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
 \begin_inset Formula $Miss\, Time\:=\: Hit\, Time\:+\: Miss\, Penalty$
 \end_inset
 
- , sapendo che 
+ 
+\end_layout
+
+\begin_layout Itemize
 \begin_inset Formula $Hit\, Rate\:+\: Miss\, Rate\:=\:1$
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
-Quindi otteniamo:
+Possiamo riscrivere la formula come:
 \begin_inset Formula 
 \[
 AMAT\:=\: Hit\, Time\:+\: Miss\, Rate\,\cdot\, Miss\, Penalty
@@ -12299,7 +12308,7 @@ Fully Associative Cache
 n-way Set-Associative Cache
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 
 \emph on
 Direct Mapped Cache
@@ -12314,7 +12323,7 @@ Ogni locazione di memoria corrisponde ad una e solo una locazione nella
 L'indirizzo del blocco nella cache è dato da:
 \begin_inset Formula 
 \[
-\left(\text{Block Address}\right)_{\text{cache}}=\left(\text{Block Address}\right)_{mem}\, mod\,\left(\text{\#Cache blocks}\right)
+\left(\text{Block Address}\right)_{\text{cache}}=\left(\text{Block Address}\right)_{\mbox{mem}}\mod\left(\text{\#Cache blocks}\right)
 \]
 
 \end_inset
@@ -12547,7 +12556,7 @@ Word offset
 
 \begin_deeper
 \begin_layout Itemize
-Se il blocco contiene solo una word, 
+Se il blocco contiene solo una word (memoria indirizzata al byte), 
 \begin_inset Formula $K=0$
 \end_inset
 
@@ -12601,7 +12610,7 @@ Tag
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Esempio di Direct Mapped Cache
 \end_layout
 
@@ -12638,11 +12647,11 @@ Block size:
 
 \begin_layout Standard
 Quindi avremo 
-\begin_inset Formula $log_{2}\left(\text{Block size}\right)=log_{2}\left(16\right)=4\, bit$
+\begin_inset Formula $\log_{2}\left(\text{Block size}\right)=\log_{2}16=4\, bit$
 \end_inset
 
  come block offset, mentre l'index sarà da 
-\begin_inset Formula $log_{2}\left(\text{Numero blocchi}\right)=log_{2}\left(4096\right)=12\, bit$
+\begin_inset Formula $\log_{2}\left(\text{Numero blocchi}\right)=\log_{2}4096=12\, bit$
 \end_inset
 
  .
@@ -12719,7 +12728,7 @@ Byte offset (2 bit)
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 
 \emph on
 Fully Associative Cache
@@ -12730,29 +12739,36 @@ In una cache
 \emph on
 fully associative
 \emph default
-, 
+ 
 \series bold
 un blocco può essere messo in qualunque posizione nella cache
 \series default
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 Quando cerchiamo un blocco dobbiamo controllarli tutti!
 \end_layout
 
-\begin_layout Standard
-In questo caso non esiste un indice, ma utilizziamo esclusivamente un tag
+\begin_layout Itemize
+In questo caso 
+\bar under
+non esiste un indice
+\bar default
+, ma 
+\series bold
+utilizziamo esclusivamente un tag
+\series default
  per trovare il blocco giusto.
 \end_layout
 
-\begin_layout Standard
-(La ricerca in teoria può essere fatta in parallelo su tutti i blocchi mettendo
- dei compratori e un multiplexer)
+\begin_layout Itemize
+(La ricerca può essere fatta in parallelo su tutti i blocchi mettendo dei
+ compratori e un multiplexer)
 \end_layout
 
 \begin_layout Standard
-Quindi la struttura dell'indirizzo sarà:
+La struttura dell'indirizzo sarà:
 \end_layout
 
 \begin_layout Standard
@@ -12921,7 +12937,7 @@ Quindi:
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Esempio di Fully Associative Cache
 \end_layout
 
@@ -12962,7 +12978,7 @@ Block size:
 
 \begin_layout Standard
 Quindi il block offset sarà in totale di 
-\begin_inset Formula $log_{2}\left(\text{Block size}\right)=log_{2}\left(16\right)=4\, bit$
+\begin_inset Formula $\log_{2}\left(\text{Block size}\right)=\log_{2}16=4\, bit$
 \end_inset
 
 .
@@ -13100,10 +13116,14 @@ Byte Offset (2 bit)
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 
 \emph on
 n-way Set Associative Cache
+\end_layout
+
+\begin_layout Standard
+Si tratta di un compromesso tra la direct mapped e la fully associative.
 \end_layout
 
 \begin_layout Standard
@@ -13152,7 +13172,7 @@ Ogni blocco di memoria ha un suo set che gli corrisponde e può essere inserito
 Il set responsabile di un determinato blocco viene definito come:
 \begin_inset Formula 
 \[
-\left(\text{Set}\right)_{\text{cache}}\,=\,\left(\text{Block address}\right)_{\text{mem}}\, mod\,\left(\text{Number of sets}\right)
+\left(\text{Set}\right)_{\text{cache}}\,=\,\left(\text{Block address}\right)_{\text{mem}}\mod\left(\text{Number of sets}\right)
 \]
 
 \end_inset
@@ -13355,7 +13375,7 @@ B
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Esempio di 4-way Set Associative Cache
 \end_layout
 
@@ -13486,6 +13506,10 @@ Byte offset (2 bit)
 \end_layout
 
 \begin_layout Subsection
+Problemi della cache
+\end_layout
+
+\begin_layout Subsubsection
 Tradeoff sulla associatività
 \end_layout
 
@@ -13538,11 +13562,11 @@ Aumento di associatività
 \begin_inset Formula $\Rightarrow$
 \end_inset
 
-Espandere i tag bits, ridurre gli index bit.
+Espandere il numero di tag bit, ridurre gli index bit.
 \end_layout
 
-\begin_layout Subsection
-Il problema dell'allocazione del blocco
+\begin_layout Subsubsection
+Allocazione del blocco
 \end_layout
 
 \begin_layout Itemize
@@ -13550,7 +13574,7 @@ Nel caso di una cache
 \emph on
 fully associative
 \emph default
-, quando abbiamo una 
+ quando abbiamo una 
 \series bold
 \emph on
 miss 
@@ -13573,14 +13597,14 @@ Se la cache è
 \emph on
 set-associative
 \series bold
-, 
+ 
 \series default
 \emph default
-il problema non cambia, dobbiamo selezionare tra un certo insieme.
+il problema non cambia, dobbiamo solo selezionare tra un insieme più ristretto.
 \end_layout
 
 \begin_layout Itemize
-Invece per una cache direct mapped c'è solo un candidato possibile da sostituire.
+Per una cache direct mapped c'è solo un candidato possibile da sostituire.
 \end_layout
 
 \begin_layout Standard
@@ -13592,7 +13616,7 @@ Le principali strategie per scegliere quale blocco sostituire sono tre:
 \series bold
 Random
 \series default
- (o pseudo-random): A caso
+ (o pseudo-random): A caso.
 \end_layout
 
 \begin_layout Itemize
@@ -13600,7 +13624,7 @@ Random
 \series bold
 LRU
 \series default
- (Least Recently Used): Cambio quello che non leggo da più tempo
+ (Least Recently Used): Cambio quello che non leggo da più tempo.
 \end_layout
 
 \begin_layout Itemize
@@ -13608,13 +13632,17 @@ LRU
 \series bold
 FIFO
 \series default
- (First In First Out): Cambio il più vecchio
+ (First In First Out): Cambio il più vecchio.
 \end_layout
 
-\begin_layout Subsection
-Il problema della 
+\begin_layout Subsubsection
+
 \emph on
-write policy
+Write policy
+\end_layout
+
+\begin_layout Standard
+Come tratto una write su un blocco in cache?
 \end_layout
 
 \begin_layout Itemize
@@ -13622,8 +13650,8 @@ write policy
 \series bold
 Write-Through
 \series default
-: L'informazione viene scritta sia ne blocco nella cache, sia nel blocco
- nella memoria a basso livello.
+: L'informazione viene scritta sia nel blocco in cache sia nel blocco in
+ memoria a basso livello.
 \end_layout
 
 \begin_deeper
@@ -13694,15 +13722,17 @@ tante scritture sullo stesso blocco richiedono una unica scrittura verso
 \end_layout
 
 \end_deeper
-\begin_layout Subsection
+\begin_layout Subsubsection
 Problema della Write 
 \end_layout
 
 \begin_layout Standard
 Quando c'è una richiesta di write e in cache non c'è ancora la riga relativa
  al blocco (
+\series bold
 \emph on
 write miss
+\series default
 \emph default
 ), cosa faccio?
 \end_layout
@@ -13724,14 +13754,21 @@ fetch on write
 \begin_inset Quotes erd
 \end_inset
 
-)
-\series bold
-: Alloco
-\series default
- una nuova riga nellacache e poi scrivo
+): 
 \end_layout
 
 \begin_deeper
+\begin_layout Itemize
+
+\emph on
+Alloca
+\series bold
+ 
+\series default
+\emph default
+una nuova riga nella cache e poi scrivo.
+\end_layout
+
 \begin_layout Itemize
 Significa che solitamente bisogna fare una 
 \begin_inset Quotes eld
@@ -13741,7 +13778,7 @@ read miss
 \begin_inset Quotes erd
 \end_inset
 
- per riempire la entry
+ per riempire la entry.
 \end_layout
 
 \end_deeper
@@ -13767,9 +13804,16 @@ write around
 
 \begin_deeper
 \begin_layout Itemize
-Invia semplicemente i dati da scrivere direttamente alla memoria di basso
- livello.
- Non allocare una nuova riga nella cache
+Invia i dati da scrivere direttamente alla memoria di basso livello.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Non alloca
+\emph default
+ una nuova riga nella cache.
 \end_layout
 
 \end_deeper
@@ -13783,14 +13827,11 @@ Per gestire una write miss si possono utilizzare entrambi i metodi, insieme
 \series bold
 Write-back 
 \series default
-\emph on
-cache
-\emph default
- utilizza l'opzione 
+cache utilizza l'opzione 
 \series bold
 Write Allocate 
 \series default
-(sperando che le prossime write del blocco saranno fatte ancora nella cache)
+(sperando che le prossime write del blocco saranno fatte ancora nella cache).
 \end_layout
 
 \begin_layout Itemize
@@ -13803,7 +13844,7 @@ Write-through
 No Write Allocate
 \series default
  (sperando che le prossime write sul blocco siano fatte ancora direttamente
- in memoria)
+ in memoria).
 \end_layout
 
 \begin_layout Subsection
@@ -13882,6 +13923,10 @@ La CPU va in stallo
 
 \end_deeper
 \begin_layout Subsection
+Prestazioni della cache
+\end_layout
+
+\begin_layout Subsubsection
 Impatto della gerarchia di memoria sul 
 \begin_inset Formula $CPU_{time}$
 \end_inset
@@ -13980,8 +14025,8 @@ CPU_{time}\,=\, IC\cdot\left(CPU_{exec}+\text{Stalls per instr}+MAPI\cdot\left(\
 
 \end_layout
 
-\begin_layout Subsection
-Performance della cache
+\begin_layout Subsubsection
+Impatto sull'AMAT
 \end_layout
 
 \begin_layout Standard
@@ -14015,7 +14060,33 @@ Ridurre miss rate
 Ridurre miss penalty
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Inserire riassunto schematico sulle tecniche di riduzione dell'AMAT basate
+ rispettivamente su:
+\end_layout
+
+\begin_layout Plain Layout
+> riduzione hit time
+\end_layout
+
+\begin_layout Plain Layout
+> riduzione miss rate
+\end_layout
+
+\begin_layout Plain Layout
+> riduzione miss penalty
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
 Architettura Harvard
 \end_layout
 
@@ -14045,7 +14116,7 @@ L'assunzione è che solitamente:
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Second Level Cache
 \end_layout
 
@@ -14169,7 +14240,7 @@ Vediamo inoltre che:
 \end_layout
 
 \begin_layout Subsubsection
-Metriche di performance
+Altre metriche di performance
 \end_layout
 
 \begin_layout Itemize
@@ -14199,15 +14270,15 @@ Ambdahl
 
 \begin_layout Itemize
 La capacità della memoria dovrebbe crescere linearmente con la velocità
- del processore
+ del processore.
 \end_layout
 
 \begin_layout Itemize
-Sfortunatamente la capacitù della memoria e la velocità non vanno di pari
+Sfortunatamente la capacità della memoria e la velocità non vanno di pari
  passo con i processori.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Tecnologia cache vs tecnologia RAM
 \end_layout
 
