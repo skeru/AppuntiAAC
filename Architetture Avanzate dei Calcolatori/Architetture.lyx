@@ -4423,7 +4423,7 @@ Esamineremo alcune tecniche per affrontare questa perdita di performance
 
 \end_deeper
 \begin_layout Subsection
-Tecniche di predizione dei branch
+Predizione dei branch
 \end_layout
 
 \begin_layout Standard
@@ -4518,7 +4518,7 @@ In entrambi i casi è necessario fare molta attenzione e tenersi pronti ad
  una misprediction (predizione errata).
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Tecniche di predizione statica
 \end_layout
 
@@ -4570,8 +4570,12 @@ Profile-Driven Prediction
 Delayed Branch
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Branch always (not) taken
+\end_layout
+
+\begin_layout Paragraph
+Discussione per Branch always Not taken
 \end_layout
 
 \begin_layout Standard
@@ -4683,7 +4687,7 @@ branch outcome
  Quindi per MIPS questa tecnica non è utile.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Backward Taken Forward Not Taken (BTFNT)
 \end_layout
 
@@ -4754,7 +4758,7 @@ si ricorda che nella maggior parte dei casi anche i cicli con controllo
  il loop.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Profile-driven prediction
 \end_layout
 
@@ -4778,7 +4782,7 @@ consigli
  del compilatore.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Delayed Branch Technique
 \end_layout
 
@@ -4866,7 +4870,7 @@ From after
 \end_layout
 
 \end_deeper
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Delayed branch technique: from before
 \end_layout
 
@@ -4897,7 +4901,7 @@ Esempio:
 \end_layout
 
 \end_deeper
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Delayed branch technique: from target
 \end_layout
 
@@ -4924,7 +4928,7 @@ add
  (come nel caso dei loop).
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Delayed branch technique: from fall-through
 \end_layout
 
@@ -5136,7 +5140,7 @@ L'istruzione nel branch delay slot non viene eseguita (viene trasformata
 \end_layout
 
 \end_deeper
-\begin_layout Subsubsection
+\begin_layout Subsection
 Tecniche di predizione dinamica dei branch
 \end_layout
 
@@ -5208,7 +5212,7 @@ Se il branch è not taken → PC viene incrementato
 Se il branch è taken → BTP (il predittore) dà l'indirizzo di destinazione
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Branch History Table - BHT (o Branch Prediction Buffer)
 \end_layout
 
@@ -5265,7 +5269,7 @@ fornisce solo una traccia
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 
 \series bold
 Accuratezza della Branch History Table
@@ -5289,7 +5293,7 @@ Per risolvere il secondo problema è sufficiente aumentare il numero di righe
  nella tabella o utilizzare una buona funzione di hash.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 
 \series bold
 Altri problemi si hanno
@@ -5324,7 +5328,7 @@ Sembra un problema trascurabile, ma se consideriamo che, per esempio, abbiamo
 e è solo dell'80%!
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 
 \series bold
 Modifica utilizzando 2 bit
@@ -5365,7 +5369,7 @@ I due bit vengono utilizzati per memorizzare uno dei 4 stati di una macchina
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 
 \series bold
 Branch History Table a n-bit
@@ -5411,7 +5415,7 @@ n-bit
  mostrano come il caso a 2-bit sia comunque sufficiente e abbastanza performante.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Correlare i predittori dei branch
 \end_layout
 
@@ -5626,7 +5630,7 @@ Accuratezza dei correlating predictors
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Two-level Adaptive Branch Predictors
 \end_layout
 
@@ -5665,7 +5669,7 @@ Una volta che il contatore a 2 bit viene selezionato, la predizione viene
  fatta con lo stesso metodo come nello schema del contatore a 2 bit.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Global Adaptive Predictor
 \end_layout
 
@@ -5747,7 +5751,7 @@ BHR
 
 \end_deeper
 \end_deeper
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Branch Target Buffer
 \end_layout
 
@@ -5871,7 +5875,7 @@ Bits per lo stato di predizione
 \end_layout
 
 \end_deeper
-\begin_layout Paragraph
+\begin_layout Subsection
 Commenti sulla branch prediction
 \end_layout
 
