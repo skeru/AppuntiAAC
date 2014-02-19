@@ -13978,7 +13978,7 @@ Dove:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $\text{CPU exec cycles}\,=\, IC\cdot CPU_{exec}$
+\begin_inset Formula $\text{CPU exec cycles}\,=\, IC\cdot CPI_{exec}$
 \end_inset
 
 
@@ -14008,7 +14008,7 @@ Dove:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-CPU_{time}=IC\cdot\left(CPU_{exec}\,+\,\left(\text{Misses per instr}\right)\cdot\left(\text{Miss\,\ penalty}\right)\right)\cdot T_{CLK}
+CPU_{time}=IC\cdot\left(CPI_{exec}\,+\,\left(\text{Misses per instr}\right)\cdot\left(\text{Miss\,\ penalty}\right)\right)\cdot T_{CLK}
 \]
 
 \end_inset
@@ -14030,7 +14030,7 @@ Dove:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-CPU_{time}\,=\, IC\cdot\left(CPU_{exec}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
+CPU_{time}\,=\, IC\cdot\left(CPI_{exec}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
 \]
 
 \end_inset
@@ -14045,7 +14045,7 @@ Se consideriamo anche gli stalli a causa degli hazards della pipeline:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-CPU_{time}\,=\, IC\cdot\left(CPU_{exec}+\text{Stalls per instr}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
+CPU_{time}\,=\, IC\cdot\left(CPI_{exec}+\text{Stalls per instr}+MAPI\cdot\left(\text{Miss\,\ rate}\right)\cdot\left(\text{Miss penalty}\right)\right)\cdot T_{CLK}
 \]
 
 \end_inset
@@ -14374,6 +14374,121 @@ Cache → SRAM
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Tipi di Miss
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Compulsory Misses 
+\series default
+(
+\emph on
+cold start misses
+\emph default
+)
+\series bold
+ : 
+\series default
+Prime miss dovute a mancanza nella cache.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+È indipendente dalla dimensione della cache, avviene anche in una cache
+ a dimensione infinita.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Capacity Misses
+\series default
+: Dovute alla mancanza di spazio nella cache.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Conflict Misses
+\series default
+: Possono essere ridotte aumentando la dimensione della cache e/o l'associativit
+à.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Coherence Misses
+\series default
+: Miss causate da problemi di coerenza della cache in architetture multiprocesso
+re.
+\end_layout
+
+\begin_layout Subsection
+Come ridurre il miss rate
+\end_layout
+
+\begin_layout Itemize
+Aumentiamo la 
+\series bold
+dimensione della cache
+\series default
+ (costi e consumi maggiori)
+\end_layout
+
+\begin_layout Itemize
+Aumentiamo la 
+\series bold
+block size
+\series default
+ della cache 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Deve restare comunque ben più piccola della dimensione della cache
+\end_layout
+
+\begin_layout Itemize
+Lo svantaggio è che aumentiamo però anche la miss penalty
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Aumentare l'
+\series bold
+associatività 
+\series default
+della cache
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Riduce i 
+\emph on
+conflict misses
+\emph default
+, però aumenta l'hit time a causa della complessità.
+ Richiede più costi e consumi
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Organizzare la cache in banchi di cache indipendenti a cui è possibile accedere
+ simultaneamente
+\end_layout
+
+\begin_layout Itemize
+Aggiungere un 
+\series bold
+buffer
+\series default
+ per i dati scartati dalla cache, per sfruttare meglio la località temporale.
+\end_layout
+
 \begin_layout Section
 Multiprocessori
 \end_layout
