@@ -1332,7 +1332,7 @@ instruction memory
 Aggiorna il program counter
 \emph default
  aggiungendo 4 all'indirizzo corrente (ogni istruzione sono 4 Bytes = 32
- bits)
+ bit)
 \end_layout
 
 \end_deeper
@@ -5413,9 +5413,17 @@ Diversi studi su predittori a
 \emph on
 n-bit
 \emph default
- mostrano come il caso a 2-bit sia comunque sufficiente e abbastanza performante.
+ mostrano come il caso a 2-bit sia comunque sufficiente per ottenere buone
+ performance.
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Aumentare il numero di bit non migliora significativamente l'accuratezza
+ della predizione.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 Correlare i predittori dei branch
 \end_layout
@@ -5560,7 +5568,7 @@ correlating branch predictor
 
  bit.
  Il buffer di predizione dei branch può essere indirizzato utilizzando una
- concatenazione di bits meno significativi del branch address insieme con
+ concatenazione di bit meno significativi del branch address insieme con
  
 \begin_inset Formula $m$
 \end_inset
@@ -5860,7 +5868,7 @@ tag + Target address previsto
 \series default
  (PC-relative) + 
 \series bold
-Bits per lo stato di predizione
+Bit per lo stato di predizione
 \end_layout
 
 \begin_deeper
