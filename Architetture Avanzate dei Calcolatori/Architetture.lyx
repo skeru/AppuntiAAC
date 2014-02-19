@@ -5260,13 +5260,14 @@ HIT
 \begin_inset Quotes erd
 \end_inset
 
-) e il bit di predizione può essere messo da un altro branch con lo stesso
- indice, tuttavia questa possibilità non preoccupa in quanto la predizione
- 
+) e il bit di predizione può essere stoto messo o sostituito da un altro
+ branch con lo stesso indice (collisione).
+ Questa possibilità tuttavia non preoccupa più di tanto poiché non si verifica
+ spesso ed anche se accadesse ricordiamo che la predizione 
 \series bold
 fornisce solo una traccia
 \series default
-.
+ e non vi è necessità di assoluta correttezza.
 \end_layout
 
 \begin_layout Standard
@@ -5295,13 +5296,13 @@ la predizione è sbagliata per quel branch OPPURE
 \end_layout
 
 \begin_layout Itemize
-se lo stesso indice è stato utilizzato per due branch diversi.
- 
+se lo stesso indice è stato utilizzato per due branch diversi (e le predizioni
+ non combaciano).
 \end_layout
 
 \begin_layout Standard
 Per risolvere il secondo problema è sufficiente aumentare il numero di righe
- nella tabella o utilizzare una buona funzione di hash.
+ nella tabella o utilizzare una buona funzione di hash per indicizzarla.
 \end_layout
 
 \begin_layout Paragraph
@@ -5316,6 +5317,7 @@ In una branch che fa parte di un loop, poiché utilizziamo un solo bit per
  (invece di una volta sola).
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
 Nell'ultimo ciclo del loop, poiché la predizione dice 
 \begin_inset Quotes eld
@@ -5333,6 +5335,7 @@ Quando ri-entriamo di nuovo nello stesso loop, sbagliamo di nuovo a prevedere
  il branch perché avevamo cambiato il bit quando eravamo usciti.
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 Sembra un problema trascurabile, ma se consideriamo che, per esempio, abbiamo
  2 predizioni scorrette e 8 corrette significa che l'accuratezza della predizion
@@ -5444,8 +5447,8 @@ Correlare i predittori dei branch
 \series bold
 Idea:
 \series default
- i comportamenti dei branch sono correlati, cioè c'è correlazione tra le
- varie branch oltre che tra la stessa branch.
+ i comportamenti dei branch sono correlati, cioè c'è correlazione tra i
+ vari branch oltre che tra gli esiti dello stesso branch.
 \end_layout
 
 \begin_layout Paragraph
@@ -5515,7 +5518,7 @@ correlating predictor
 \end_layout
 
 \begin_layout Itemize
-Esempio:
+Esempio di struttura:
 \end_layout
 
 \begin_deeper
@@ -5612,8 +5615,9 @@ Esempio: Correlating Branch Predictor (2,2): Abbiamo
 \end_layout
 
 \begin_layout Itemize
-64 entries, indice di 6 bit composto da 2 bit di history globale e 4 bit
- per la parte meno significativa dell'indirizzo del branch.
+Si ha quindi un totale di 64 entries e un indice di 6 bit (composto da 2
+ bit di history globale e 4 bit per la parte meno significativa dell'indirizzo
+ del branch).
 \end_layout
 
 \begin_layout Itemize
@@ -5909,7 +5913,7 @@ basic block
 \end_layout
 
 \begin_layout Standard
-Le tecniche di predizione di branch ci aiutano a migliorare il parallelismo.
+Le tecniche di predizione dei branch ci aiutano a migliorare il parallelismo.
  Nei metodi di predizione che abbiamo mostrato, facciamo fetch, issue ed
  execute di istruzioni successive come se le predizioni fossero sempre corrette,
  avendo però sempre pronto un metodo per risolvere le situazioni di predizione
