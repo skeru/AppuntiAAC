@@ -9409,6 +9409,19 @@ La scoreboard controlla quando l'istruzione può scrivere il suo risultato
 
 \end_deeper
 \begin_layout Subsubsection
+Accesso al Register File
+\end_layout
+
+\begin_layout Standard
+L'accesso al RF avviene attraverso un numero finito di porte di lettura
+ e scrittura.
+ La scoreboard si preoccupa anche di gestire l'accesso al RF allocando le
+ porte disponibili.
+ Ogni registro richiesto da un'istruzione conta come un accesso che necessita
+ di una porta.
+\end_layout
+
+\begin_layout Subsubsection
 
 \series bold
 Gestione delle eccezioni
@@ -9612,6 +9625,12 @@ out-of-order
 Non c'è forwarding dei dati in questo modello.
 \end_layout
 
+\begin_layout Itemize
+Il RF ha un numero finito di porte di lettura.
+ Nel caso in un ciclo di clock fossero tutte occupate si genera un conflitto
+ strutturale.
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
 
@@ -9683,6 +9702,12 @@ Se c'è un WAR, allora va in stallo prima di completare l'istruzione.
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+Il RF ha un numero finito di porte di scrittura.
+ Nel caso in cui in un ciclo di clock ci siano più istruzioni che vogliono
+ scrivere di quante sono le porte di scrittura si ha un conflitto strutturale.
+\end_layout
+
 \begin_layout Itemize
 Esempio:
 \end_layout
