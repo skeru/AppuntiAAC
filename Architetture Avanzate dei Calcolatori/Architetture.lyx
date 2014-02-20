@@ -5644,14 +5644,10 @@ Accuratezza dei correlating predictors
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename svg/050.svg
-	scale 50
-
-\end_inset
-
-
+Generalmente un (2,2) correlating branch predictor riesce ad ottenere predizioni
+ più accurate rispetto a un predittore di tipo BHT.
+ Entrambi questi predittori sono molto più accurati delle tecniche di predizione
+ statica.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6004,7 +6000,7 @@ Caso migliore:
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename svg/055.svg
+	filename cc_svg/051_pipeline_vs_sequenziale.svg
 	scale 50
 
 \end_inset
@@ -6308,7 +6304,7 @@ Non ci sono control hazards.
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename 059.png
+	filename cc_svg/059_pipeline_ILP_raddoppiare_IPC.svg
 	scale 40
 
 \end_inset
