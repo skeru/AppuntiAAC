@@ -14425,18 +14425,52 @@ re.
 \end_layout
 
 \begin_layout Subsection
-Come ridurre il miss rate
+Ridurre il miss rate
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Aumentiamo la 
 \series bold
 dimensione della cache
 \series default
- (costi e consumi maggiori)
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Riduce capacity miss.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Costi maggiori.
 \end_layout
 
 \begin_layout Itemize
+Consumi maggiori.
+\end_layout
+
+\begin_layout Itemize
+Aumenta hit time.
+\end_layout
+
+\begin_layout Itemize
+Aumenta l'area occupata.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
 Aumentiamo la 
 \series bold
 block size
@@ -14446,15 +14480,45 @@ block size
 
 \begin_deeper
 \begin_layout Itemize
-Deve restare comunque ben più piccola della dimensione della cache
+PRO
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-Lo svantaggio è che aumentiamo però anche la miss penalty
+Riduce i compulsory miss (per la località spaziale).
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta miss penalty.
+\end_layout
+
+\begin_layout Itemize
+Aumentano conflict miss.
+\end_layout
+
+\begin_layout Itemize
+Aumentano capacity miss.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+QUINDI
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Deve restare ben più piccola della dimensione della cache.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
 Aumentare l'
 \series bold
 associatività 
@@ -14473,12 +14537,12 @@ conflict misses
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
+\begin_layout Enumerate
 Organizzare la cache in banchi di cache indipendenti a cui è possibile accedere
  simultaneamente
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Aggiungere un 
 \series bold
 buffer
