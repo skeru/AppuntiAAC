@@ -14510,7 +14510,7 @@ PRO
 
 \begin_deeper
 \begin_layout Itemize
-Riduce i compulsory miss (per la località spaziale).
+Riduce i compulsory misses (per la località spaziale).
 \end_layout
 
 \end_deeper
@@ -14524,11 +14524,11 @@ Aumenta miss penalty.
 \end_layout
 
 \begin_layout Itemize
-Aumentano conflict miss.
+Aumentano conflict misses.
 \end_layout
 
 \begin_layout Itemize
-Aumentano capacity miss.
+Aumentano capacity misses.
 \end_layout
 
 \end_deeper
@@ -14553,28 +14553,183 @@ della cache
 
 \begin_deeper
 \begin_layout Itemize
-Riduce i 
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Riduce i conflict misses.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta l'hit time (a causa della complessità).
+\end_layout
+
+\begin_layout Itemize
+Consumi maggiori.
+\end_layout
+
+\begin_layout Itemize
+Aumenta l'area occupata.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+QUINDI
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+È possibile organizzare la cache in banchi indipendenti di cache a cui è
+ possibile accedere simultaneamente (set-associative cache).
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Victim cache
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aggiungere un 
+\bar under
+piccolo
+\bar default
+ buffer completamente 
+\bar under
+associativo 
+\bar default
+per i dati scartati dalla cache.
+ In caso di miss viene controllata prima di passare al livello inferiore;
+ se un avviene un hit nella victim cache il blocco viene ripescato e sostituito
+ con un altro nella cache principale.
+\end_layout
+
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Sfrutta meglio la località temporale.
+\end_layout
+
+\begin_layout Itemize
+Riduce il penalty dovuto ai conflict misses.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta la complessità.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Pseudo associatività
+\series default
+ e 
+\series bold
+way prediction
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La 
 \emph on
-conflict misses
+pseudo associatività
 \emph default
-, però aumenta l'hit time a causa della complessità.
- Richiede più costi e consumi
+ consiste nel dividere logicamente una cache direct mapped in due o più
+ sezioni (way) consultate in cascata.
+ In caso di hit nella way principale si ha un hit, in caso di hit in una
+ qualsiasi delle altre way si ha uno pseudo-hit.
+ Il tempo di pseudo-hit è superiore al tempo di hit ma è di molto inferiore
+ al tempo di accesso ad una cache di livello inferiore.
+\end_layout
+
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta l'associatività in una cache direct mapped.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta la complessità.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+La 
+\emph on
+way prediction
+\emph default
+ consiste nell'aggiungere dei bit di predizione con cui decidere in quale
+ way cercare come primo tentativo.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Applicabile a cache set associative o pseudo associative.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Hardware prefetching
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Precaricare i dati o le istruzioni.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Organizzare la cache in banchi di cache indipendenti a cui è possibile accedere
- simultaneamente
+Software prefetching
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+È possibile fornire istruzioni di precaricamento di dati (o istruzioni)
+ prima che essi siano utilizzati nel codice.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
-Aggiungere un 
-\series bold
-buffer
-\series default
- per i dati scartati dalla cache, per sfruttare meglio la località temporale.
+Ottimizzazioni del compilatore
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Riordinare le istruzioni in modo da preservare la località e ridurre i misses.
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Multiprocessori
 \end_layout
