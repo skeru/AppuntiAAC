@@ -14877,6 +14877,140 @@ Aggiorna il write buffer in caso di scritture sullo stesso indirizzo invece
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Ridurre l'hit time
+\end_layout
+
+\begin_layout Standard
+A differenza di miss rate e miss penalty, l'hit time della cache L1 influisce
+ direttamente sul clock rate.
+\end_layout
+
+\begin_layout Enumerate
+L1 
+\series bold
+cache piccola
+\series default
+ e 
+\series bold
+direct mapped
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Minore associatività riduce il numero di entry della cache coinvolte nella
+ ricerca.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Minori consumi.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Virtual cache
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La cache viene indirizzata con gli indirizzi virtuali invece che con gli
+ indirizzi fisici della memoria.
+\end_layout
+
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Evita il passaggio di traduzione di indirizzi.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta i compulsory misses.
+ Ad ogni context switch infatti è necessario un flush della cache per evitare
+ falsi hit.
+\end_layout
+
+\begin_layout Itemize
+È necessario gestire il complesso problema degli alias (diversi indirizzi
+ virtuali che puntano allo stesso indirizzo fisico).
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Eseguire in 
+\series bold
+pipeline 
+\series default
+controllo sul tag e 
+\series bold
+write 
+\series default
+in cache.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+????????
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Rende più semplice aumentare l'associatività.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta il branch misprediction penalty.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+???
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Sottoblocchi più piccoli
+\series default
+.
+\end_layout
+
 \begin_layout Section
 Multiprocessori
 \end_layout
