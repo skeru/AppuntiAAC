@@ -14730,6 +14730,153 @@ Riordinare le istruzioni in modo da preservare la località e ridurre i misses.
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Ridurre il miss penalty
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Priorità ai read misses 
+\series default
+rispetto ai write misses.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Il write buffer deve essere adeguatamente dimensionato.
+\end_layout
+
+\begin_layout Itemize
+La ricerca deve essere estesa anche al write buffer.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Sostituzione dei sottoblocchi
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mantenere bit di 
+\series bold
+validità per i singoli sottoblocchi
+\series default
+ e invalidarne / ricaricare solo una parte.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Early restart e Critical word first
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Early restart 
+\series default
+prevede in caso di miss di caricare il blocco parola per parola e non appena
+ la parola richiesta è pronta riprendere l'esecuzione.
+ Il resto del blocco viene caricato ad esecuzione ripresa.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Critical word first
+\series default
+ è una variante del caso precedente.
+ In questo caso la prima parola del blocco che viene caricata in cache è
+ quella richiesta.
+ Il resto del blocco viene caricato ad esecuzione ripresa.
+\end_layout
+
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ha senso per blocchi di grandi dimensioni.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Va contro il principio di località spaziale.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Cache 
+\series bold
+non-blocking
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Consentire a successive richieste di dati di accedere alla cache anche durante
+ un miss.
+ Questo permette di servire dei successivi hit mentre viene recuperato il
+ dato in miss.
+\end_layout
+
+\begin_layout Itemize
+Crea un accesso a memoria out of order.
+\end_layout
+
+\begin_layout Itemize
+PRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Riduce l'impatto di un miss sul totale degli accessi.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+CONTRO
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aumenta significativamente la complessità della cache.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Aggiungere un 
+\series bold
+altro livello 
+\series default
+di cache
+\end_layout
+
+\begin_layout Enumerate
+Eseguire 
+\series bold
+merge 
+\series default
+nel 
+\series bold
+write buffer
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aggiorna il write buffer in caso di scritture sullo stesso indirizzo invece
+ di accodare la richiesta.
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Multiprocessori
 \end_layout
