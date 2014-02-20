@@ -6001,6 +6001,7 @@ Caso migliore:
 \align center
 \begin_inset Graphics
 	filename cc_svg/051_pipeline_vs_sequenziale.svg
+	lyxscale 50
 	scale 50
 
 \end_inset
@@ -6243,7 +6244,7 @@ Altri concetti base e definizioni
 \end_layout
 
 \begin_layout Itemize
-Per raggiungere le performance più elevate (per una data tecnologia), maggior
+Per raggiungere le performance migliori (per una data tecnologia), maggior
  parallelismo deve essere estratto dal programma.
  In altre parole: 
 \series bold
@@ -13530,7 +13531,7 @@ Byte offset (2 bit)
 \end_layout
 
 \begin_layout Subsection
-Problemi della cache
+Messa a punto della cache
 \end_layout
 
 \begin_layout Subsubsection
