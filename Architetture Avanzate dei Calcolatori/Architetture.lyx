@@ -80,6 +80,10 @@
 \begin_body
 
 \begin_layout Title
+NO BULLSHIT
+\begin_inset Newline newline
+\end_inset
+
 Architetture Avanzate dei Calcolatori
 \begin_inset Foot
 status open
@@ -137,6 +141,24 @@ LatexCommand tableofcontents
 \end_inset
 
 
+\end_layout
+
+\begin_layout Part*
+Premessa
+\end_layout
+
+\begin_layout Standard
+Questo documento è frutto della rielaborazione di appunti personali presi
+ durante il corso di Architetture Avanzate dei Calcolatori a.a.
+ 2013-2014 c/o Politecnico di Milano.
+\end_layout
+
+\begin_layout Standard
+Il presente documento non è stato approvato da alcun docente e potrebbe
+ contenere errori od omissioni.
+ Gli autori non forniscono alcuna garanzia sulla correttezza dei contenuti.
+ Vi invitiamo a segnalare agli autori ogni problema riscontrato.
+ Prenderemo in esame le vostre considerazioni appena ci sarà possibile.
 \end_layout
 
 \begin_layout Part*
